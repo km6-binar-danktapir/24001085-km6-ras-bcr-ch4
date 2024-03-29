@@ -1,1 +1,4 @@
-# 24001085-km6-ras-bcr-ch4
+# Submission Challenge Chapter 4
+
+### Nama : Rasyad Jabbar Poncosewoyo
+### Kelas : FSW-2
