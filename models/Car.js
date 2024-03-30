@@ -12,7 +12,12 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
-
+            Car.hasMany(models.CarOptions, {
+                as: "carOptions",
+                foreignKey: "carId",
+                onUpdate: "CASCADE",
+                onDelete: "CASCADE",
+            });
         }
     }
 
