@@ -31,14 +31,42 @@ async function add(payload) {
     const carData = await carRepo.add(carPayload);
     await carOptionsRepo.add({
         carId: carData.id,
-        options: payload.options,
+        options: cleanedPayload.options,
     });
     await carSpecsRepo.add({
         carId: carData.id,
-        specs: payload.specs,
+        specs: cleanedPayload.specs,
     });
+    return findById(carData.id);
+}
 
-    return carRepo.findById(carData.id);
+async function updateById(id, payload) {
+    const cleanedPayload = getCleanedPayload(payload);
+    const carPayload = await getCarPayload(cleanedPayload);
+    const carData = await carRepo.updateById(id, carPayload);
+
+    if (cleanedPayload.options) {
+        await carOptionsRepo.updateById({
+            carId: carData.id,
+            options: cleanedPayload.options,
+        });
+    }
+    if (cleanedPayload.specs) {
+        await carSpecsRepo.updateById(carData.id, cleanedPayload.specs);
+    }
+    return findById(id);
+}
+
+async function deleteById(id) {
+    const deletedCar = await carRepo.deleteById(id);
+
+    if (!deletedCar) {
+        throw new HttpError({
+            statusCode: 404,
+            message: `Car with ID ${id} does not exist!`,
+        });
+    }
+    return deletedCar;
 }
 
 async function getCarPayload(payload) {
@@ -94,4 +122,4 @@ function getCleanedPayload(payload) {
     return payload;
 }
 
-module.exports = {findAll, findById, add};
+module.exports = {findAll, findById, add, updateById, deleteById};

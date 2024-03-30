@@ -39,4 +39,35 @@ async function addCar(req, res, next) {
     }
 }
 
-module.exports = {findAllCars, findCarById, addCar};
+async function updateCarById(req, res, next) {
+    try {
+        const carId = parseInt(req.params.id);
+        const body = req.body;
+        const {image} = req.files;
+        const payload = {...body, image};
+        const data = await carService.updateById(carId, payload);
+
+        return res.status(200).json({
+            data,
+            message: null,
+        });
+    } catch (err) {
+        next(err);
+    }
+}
+
+async function deleteCarById(req, res, next) {
+    try {
+        const carId = req.params.id;
+        const data = await carService.deleteById(carId);
+
+        return res.status(200).json({
+            data,
+            message: null,
+        });
+    } catch (err) {
+        next(err);
+    }
+}
+
+module.exports = {findAllCars, findCarById, addCar, updateCarById, deleteCarById};

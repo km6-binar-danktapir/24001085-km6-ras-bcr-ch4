@@ -76,4 +76,37 @@ async function add(payload) {
     return data;
 }
 
-module.exports = {findAll, findById, add, getAllColumnNames};
+async function updateById(id, payload) {
+    payload.image = await processImagePhoto(payload.image);
+    await Car.update(payload, {
+        where: {
+            id: id,
+        },
+    });
+    const updatedData = await Car.findByPk(id);
+
+    if (updatedData) {
+        const key = `Car:${updatedData.id}`;
+        await redis.setData(key, updatedData);
+        return updatedData;
+    }
+    return null;
+}
+
+async function deleteById(id) {
+    const toBeDeleted = await Car.findByPk(id);
+    const deletedCount = await Car.destroy({
+        where: {
+            id: id,
+        }
+    });
+
+    if (deletedCount > 0) {
+        const key = `Car:${id}`;
+        await redis.deleteData(key);
+        return toBeDeleted;
+    }
+    return null;
+}
+
+module.exports = {findAll, findById, add, getAllColumnNames, updateById, deleteById};
