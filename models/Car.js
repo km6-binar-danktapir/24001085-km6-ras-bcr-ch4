@@ -13,7 +13,13 @@ module.exports = (sequelize, DataTypes) => {
         static associate(models) {
             // define association here
             Car.hasMany(models.CarOptions, {
-                as: "carOptions",
+                as: "options",
+                foreignKey: "carId",
+                onUpdate: "CASCADE",
+                onDelete: "CASCADE",
+            });
+            Car.hasMany(models.CarSpecs, {
+                as: "specs",
                 foreignKey: "carId",
                 onUpdate: "CASCADE",
                 onDelete: "CASCADE",
