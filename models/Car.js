@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
-            Car.belongsTo(models.ModelManufacture, {foreignKey: "carModel"});
+
         }
     }
 
@@ -36,16 +36,20 @@ module.exports = (sequelize, DataTypes) => {
         description: {
             type: DataTypes.TEXT,
         },
+        year: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
+        model: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
         transmission: {
             type: DataTypes.STRING,
             allowNull: false,
         },
         type: {
             type: DataTypes.STRING,
-            allowNull: false,
-        },
-        year: {
-            type: DataTypes.INTEGER,
             allowNull: false,
         },
         available: {
@@ -55,10 +59,6 @@ module.exports = (sequelize, DataTypes) => {
         availableAt: {
             type: DataTypes.DATE,
             defaultValue: DataTypes.NOW,
-        },
-        carModel: {
-            type: DataTypes.STRING,
-            allowNull: false,
         },
     }, {
         sequelize,

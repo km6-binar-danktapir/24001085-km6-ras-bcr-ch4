@@ -28,16 +28,20 @@ module.exports = {
             description: {
                 type: Sequelize.TEXT,
             },
+            year: {
+                type: Sequelize.INTEGER,
+                allowNull: false,
+            },
+            model: {
+                type: Sequelize.STRING,
+                allowNull: false,
+            },
             transmission: {
                 type: Sequelize.STRING,
                 allowNull: false,
             },
             type: {
                 type: Sequelize.STRING,
-                allowNull: false,
-            },
-            year: {
-                type: Sequelize.INTEGER,
                 allowNull: false,
             },
             available: {
@@ -47,16 +51,6 @@ module.exports = {
             availableAt: {
                 type: Sequelize.DATE,
                 defaultValue: Sequelize.NOW,
-            },
-            carModel: {
-                type: Sequelize.STRING,
-                allowNull: false,
-                references: {
-                    model: "ModelManufacture",
-                    key: "model",
-                },
-                onUpdate: "CASCADE",
-                onDelete: "CASCADE",
             },
             createdAt: {
                 allowNull: false,
