@@ -10,6 +10,12 @@ app.use(
     })
 ); // enable body in form-data format
 
+const errorResponseHandler = require("./middlewares/error-response-handler.js");
+const carRoute = require("./routes/car-route.js");
+
 const baseEndpoint = "/api/v1";
+
+app.use(`${baseEndpoint}/cars`, carRoute);
+app.use((err, _, res, __) => errorResponseHandler(err, res));
 
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
