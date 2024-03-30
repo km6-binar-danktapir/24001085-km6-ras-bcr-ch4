@@ -17,4 +17,33 @@ async function findAll() {
     });
 }
 
-module.exports = {findAll};
+async function findById(id) {
+    let data;
+    const key = `Car:${id}`;
+    data = await redis.getData(key);
+
+    if (data) {
+        return data;
+    }
+
+    data = await Car.findByPk(id, {
+        include: [
+            {
+                model: CarOptions,
+                as: "options",
+            },
+            {
+                model: CarSpecs,
+                as: "specs",
+            },
+        ]
+    });
+
+    if (data) {
+        await redis.setData(key, data);
+        return data;
+    }
+    return null;
+}
+
+module.exports = {findAll, findById};

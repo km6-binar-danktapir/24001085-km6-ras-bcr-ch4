@@ -9,4 +9,18 @@ async function findAllCars(_, res) {
     });
 }
 
-module.exports = {findAllCars};
+async function findCarById(req, res, next) {
+    try {
+        const carId = req.params.id;
+        const data = await carService.findById(carId);
+
+        return res.status(200).json({
+            data,
+            message: null,
+        });
+    } catch (err) {
+        next(err);
+    }
+}
+
+module.exports = {findAllCars, findCarById};
