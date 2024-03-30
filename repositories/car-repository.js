@@ -1,6 +1,9 @@
 const db = require("../models/index.js");
 const {Car, CarOptions, CarSpecs} = db.sequelize.models;
 const redis = require("../helpers/redis.js");
+const crypto = require("crypto");
+const path = require("path");
+const uploader = require("../helpers/cloudinary");
 
 async function findAll() {
     return Car.findAll({
@@ -46,4 +49,31 @@ async function findById(id) {
     return null;
 }
 
-module.exports = {findAll, findById};
+async function getAllColumnNames() {
+    const columns = await Car.describe();
+    return Object.keys(columns);
+}
+
+async function processImagePhoto(photo) {
+    /**
+     * process the photo given and upload it to cloudinary
+     */
+    // make unique file name
+    photo.publicId = crypto.randomBytes(16).toString("hex");
+
+    // rename file
+    photo.name = `${photo.publicId}${path.parse(photo.name).ext}`;
+
+    const imageUpload = await uploader(photo);
+    return imageUpload.secure_url;
+}
+
+async function add(payload) {
+    payload.image = await processImagePhoto(payload.image);
+    const data = await Car.create(payload);
+    const key = `Car:${data.id}`;
+    await redis.setData(key, data);
+    return data;
+}
+
+module.exports = {findAll, findById, add, getAllColumnNames};

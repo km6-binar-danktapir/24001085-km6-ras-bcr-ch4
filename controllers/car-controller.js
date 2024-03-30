@@ -23,4 +23,20 @@ async function findCarById(req, res, next) {
     }
 }
 
-module.exports = {findAllCars, findCarById};
+async function addCar(req, res, next) {
+    try {
+        const body = req.body;
+        const {image} = req.files;
+        const payload = {...body, image};
+        const data = await carService.add(payload);
+
+        return res.status(200).json({
+            data,
+            message: null,
+        });
+    } catch (err) {
+        next(err);
+    }
+}
+
+module.exports = {findAllCars, findCarById, addCar};
