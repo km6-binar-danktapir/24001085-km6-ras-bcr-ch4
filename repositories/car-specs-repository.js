@@ -1,36 +1,32 @@
 const db = require("../models/index.js");
 const {CarSpecs} = db.sequelize.models;
 
-async function add(payload) {
-    const {carId, specs} = payload;
-
-    // kalo cuma ada 1 item, then langsung create aja
-    if (!(specs instanceof Array)) {
-        return CarSpecs.create({
-            carId,
-            spec: specs,
-        });
-    }
-    const bulkData = specs.map((spec) => {
-        return {carId, spec};
+async function findById(id) {
+    return CarSpecs.findAll({
+        attributes: ["spec"],
+        where: {
+            id: id,
+        }
     });
-    return CarSpecs.bulkCreate(bulkData);
 }
 
-async function updateById(id, payload) {
-    await deleteById(id);
-    return add({
-        carId: id,
-        specs: payload,
-    });
+async function addOne(payload) {
+    return [await CarSpecs.create({
+        carId: payload.carId,
+        spec: payload.specs,
+    })];
+}
+
+async function addMultiple(payload) {
+    return CarSpecs.bulkCreate(payload);
 }
 
 async function deleteById(id) {
     return CarSpecs.destroy({
         where: {
-            carId: id,
-        },
+            id: id,
+        }
     });
 }
 
-module.exports = {add, updateById, deleteById};
+module.exports = {findById, addOne, addMultiple, deleteById};

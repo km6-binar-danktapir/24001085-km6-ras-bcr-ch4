@@ -1,6 +1,6 @@
 const carRepo = require("../repositories/car-repository.js");
-const carOptionsRepo = require("../repositories/car-options-repository.js");
-const carSpecsRepo = require("../repositories/car-specs-repository.js");
+const carOptionsService = require("./car-options-service.js");
+const carSpecsService = require("./car-specs-service.js");
 const HttpError = require("../middlewares/http-error.js");
 
 async function findAll() {
@@ -26,14 +26,15 @@ async function add(payload) {
      * 3. buat object option(s) dan spec(s) nya
      */
     await validateInputFields(payload);
+
     const cleanedPayload = getCleanedPayload(payload);
     const carPayload = await getCarPayload(cleanedPayload);
     const carData = await carRepo.add(carPayload);
-    await carOptionsRepo.add({
+    await carOptionsService.add({
         carId: carData.id,
         options: cleanedPayload.options,
     });
-    await carSpecsRepo.add({
+    await carSpecsService.add({
         carId: carData.id,
         specs: cleanedPayload.specs,
     });
@@ -41,18 +42,20 @@ async function add(payload) {
 }
 
 async function updateById(id, payload) {
+    await validateCarExistenceById(id); // pass check untuk mastiin existence car id
+
     const cleanedPayload = getCleanedPayload(payload);
     const carPayload = await getCarPayload(cleanedPayload);
     const carData = await carRepo.updateById(id, carPayload);
 
     if (cleanedPayload.options) {
-        await carOptionsRepo.updateById({
+        await carOptionsService.updateById({
             carId: carData.id,
             options: cleanedPayload.options,
         });
     }
     if (cleanedPayload.specs) {
-        await carSpecsRepo.updateById(carData.id, cleanedPayload.specs);
+        await carSpecsService.updateById(carData.id, cleanedPayload.specs);
     }
     return findById(id);
 }
@@ -67,6 +70,16 @@ async function deleteById(id) {
         });
     }
     return deletedCar;
+}
+
+async function validateCarExistenceById(id) {
+    /**
+     * call this method for validation purpose only :D
+     *
+     * wrapper buat ngecek kalo id car ada di DB dengan manggil
+     * method findById, kalo ga ada, bakal throw error dari method itu
+     */
+    await findById(id);
 }
 
 async function getCarPayload(payload) {
