@@ -5,8 +5,8 @@ async function findById(id) {
     return CarOptions.findAll({
         attributes: ["option"],
         where: {
-            id: id,
-        }
+            carId: id,
+        },
     });
 }
 
@@ -24,8 +24,8 @@ async function addMultiple(payload) {
 async function deleteById(id) {
     return CarOptions.destroy({
         where: {
-            id: id,
-        }
+            carId: id,
+        },
     });
 }
 
