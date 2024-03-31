@@ -15,7 +15,10 @@ async function findByCarId(carId) {
 
 async function add(payload) {
     await validateInputFields(payload);
+    return _add(payload);
+}
 
+async function _add(payload) {
     const {carId, options} = payload;
 
     if (!(options instanceof Array)) {
@@ -32,6 +35,9 @@ async function add(payload) {
 }
 
 async function validateInputFields(payload) {
+    /**
+     *  cek kalo ada value yg missing
+     */
     const {carId, options} = payload;
 
     if (!carId) {
@@ -54,7 +60,7 @@ async function validateInputFields(payload) {
 async function updateById(id, payload) {
     // delete dulu trus baru add yg baru
     await deleteById(id);
-    return add({
+    return _add({
         carId: id,
         options: payload,
     });

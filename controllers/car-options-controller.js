@@ -28,4 +28,19 @@ async function addOptions(req, res, next) {
     }
 }
 
-module.exports = {findOptionsByCarId, addOptions};
+async function updateOptionsByCarId(req, res, next) {
+    try {
+        const carId = req.params.id;
+        const payload = req.body.options;
+        const data = await carOptionsService.updateById(carId, payload);
+
+        return res.status(200).json({
+            data,
+            message: null,
+        });
+    } catch (err) {
+        next(err);
+    }
+}
+
+module.exports = {findOptionsByCarId, addOptions, updateOptionsByCarId};
