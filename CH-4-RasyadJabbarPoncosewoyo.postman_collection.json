@@ -7,314 +7,507 @@
 	},
 	"item": [
 		{
-			"name": "Get All Cars",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}/cars",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"cars"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get Car By ID",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": []
-				},
-				"url": {
-					"raw": "{{baseUrl}}/cars/1",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"cars",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Delete Car By ID",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": []
-				},
-				"url": {
-					"raw": "{{baseUrl}}/cars/3",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"cars",
-						"3"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Add Car",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "plate",
-							"value": "8910",
-							"type": "text"
-						},
-						{
-							"key": "image",
-							"type": "file",
-							"src": "/D:/Pictures/Screenshots/Screenshot 2024-03-20 144528.png"
-						},
-						{
-							"key": "rentPerDay",
-							"value": "5000",
-							"type": "text"
-						},
-						{
-							"key": "capacity",
-							"value": "4",
-							"type": "text"
-						},
-						{
-							"key": "description",
-							"value": "",
-							"description": "nullable value",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "year",
-							"value": "2010",
-							"type": "text"
-						},
-						{
-							"key": "model",
-							"value": "model X",
-							"type": "text"
-						},
-						{
-							"key": "transmission",
-							"value": "manual",
-							"type": "text"
-						},
-						{
-							"key": "type",
-							"value": "some type",
-							"type": "text"
-						},
-						{
-							"key": "available",
-							"value": "true",
-							"description": "default value : true",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "availableAt",
-							"value": "",
-							"description": "default value : now()",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "options",
-							"value": "option 1",
-							"description": "item 1 of options array",
-							"type": "text"
-						},
-						{
-							"key": "options",
-							"value": "option 2",
-							"description": "item 2 of options array",
-							"type": "text"
-						},
-						{
-							"key": "options",
-							"value": "option 3",
-							"description": "item 3 of options array",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "specs",
-							"value": "spec 1",
-							"description": "item 1 of specs array",
-							"type": "text"
-						},
-						{
-							"key": "specs",
-							"value": "spec 2",
-							"description": "item 2 of specs array",
-							"type": "text"
-						},
-						{
-							"key": "specs",
-							"value": "spec 3",
-							"description": "item 3 of specs array",
-							"type": "text",
-							"disabled": true
+			"name": "Car",
+			"item": [
+				{
+					"name": "Get All Cars",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/cars",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cars"
+							]
 						}
-					]
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "{{baseUrl}}/cars",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"cars"
-					]
+				{
+					"name": "Get Car By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/cars/15",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cars",
+								"15"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Car By ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{baseUrl}}/cars/3",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cars",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Car",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "plate",
+									"value": "8910",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/D:/Pictures/Screenshots/Screenshot 2024-03-20 144528.png"
+								},
+								{
+									"key": "rentPerDay",
+									"value": "5000",
+									"type": "text"
+								},
+								{
+									"key": "capacity",
+									"value": "4",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "",
+									"description": "nullable value",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "year",
+									"value": "2010",
+									"type": "text"
+								},
+								{
+									"key": "model",
+									"value": "model X",
+									"type": "text"
+								},
+								{
+									"key": "transmission",
+									"value": "manual",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "some type",
+									"type": "text"
+								},
+								{
+									"key": "available",
+									"value": "true",
+									"description": "default value : true",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "availableAt",
+									"value": "",
+									"description": "default value : now()",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "options",
+									"value": "option 1",
+									"description": "item 1 of options array",
+									"type": "text"
+								},
+								{
+									"key": "options",
+									"value": "option 2",
+									"description": "item 2 of options array",
+									"type": "text"
+								},
+								{
+									"key": "options",
+									"value": "option 3",
+									"description": "item 3 of options array",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "specs",
+									"value": "spec 1",
+									"description": "item 1 of specs array",
+									"type": "text"
+								},
+								{
+									"key": "specs",
+									"value": "spec 2",
+									"description": "item 2 of specs array",
+									"type": "text"
+								},
+								{
+									"key": "specs",
+									"value": "spec 3",
+									"description": "item 3 of specs array",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/cars",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cars"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Car By ID",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "plate",
+									"value": "4567",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/D:/Pictures/Screenshots/Screenshot 2024-03-29 235026.png",
+									"disabled": true
+								},
+								{
+									"key": "rentPerDay",
+									"value": "5000",
+									"type": "text"
+								},
+								{
+									"key": "capacity",
+									"value": "4",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "",
+									"description": "nullable value",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "year",
+									"value": "2010",
+									"type": "text"
+								},
+								{
+									"key": "model",
+									"value": "model X",
+									"type": "text"
+								},
+								{
+									"key": "transmission",
+									"value": "manual",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "some type",
+									"type": "text"
+								},
+								{
+									"key": "available",
+									"value": "true",
+									"description": "default value : true",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "availableAt",
+									"value": "",
+									"description": "default value : now()",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "options",
+									"value": "option 1",
+									"description": "item 1 of options array",
+									"type": "text"
+								},
+								{
+									"key": "options",
+									"value": "option 2",
+									"description": "item 2 of options array",
+									"type": "text"
+								},
+								{
+									"key": "options",
+									"value": "option 3",
+									"description": "item 3 of options array",
+									"type": "text"
+								},
+								{
+									"key": "specs",
+									"value": "spec 1",
+									"description": "item 1 of specs array",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "specs",
+									"value": "spec 2",
+									"description": "item 2 of specs array",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "specs",
+									"value": "spec 3",
+									"description": "item 3 of specs array",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/cars/16",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cars",
+								"16"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "Update Car By ID",
-			"request": {
-				"method": "PATCH",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "plate",
-							"value": "4567",
-							"type": "text"
-						},
-						{
-							"key": "image",
-							"type": "file",
-							"src": "/D:/Pictures/Screenshots/Screenshot 2024-03-15 220024.png"
-						},
-						{
-							"key": "rentPerDay",
-							"value": "5000",
-							"type": "text"
-						},
-						{
-							"key": "capacity",
-							"value": "4",
-							"type": "text"
-						},
-						{
-							"key": "description",
-							"value": "",
-							"description": "nullable value",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "year",
-							"value": "2010",
-							"type": "text"
-						},
-						{
-							"key": "model",
-							"value": "model X",
-							"type": "text"
-						},
-						{
-							"key": "transmission",
-							"value": "manual",
-							"type": "text"
-						},
-						{
-							"key": "type",
-							"value": "some type",
-							"type": "text"
-						},
-						{
-							"key": "available",
-							"value": "true",
-							"description": "default value : true",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "availableAt",
-							"value": "",
-							"description": "default value : now()",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "options",
-							"value": "option 1",
-							"description": "item 1 of options array",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "options",
-							"value": "option 2",
-							"description": "item 2 of options array",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "options",
-							"value": "option 3",
-							"description": "item 3 of options array",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "specs",
-							"value": "spec 1",
-							"description": "item 1 of specs array",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "specs",
-							"value": "spec 2",
-							"description": "item 2 of specs array",
-							"type": "text"
-						},
-						{
-							"key": "specs",
-							"value": "spec 3",
-							"description": "item 3 of specs array",
-							"type": "text",
-							"disabled": true
+			"name": "Car Options",
+			"item": [
+				{
+					"name": "Get Options By Car ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/cars/options/17",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cars",
+								"options",
+								"17"
+							]
 						}
-					]
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "{{baseUrl}}/cars/16",
-					"host": [
-						"{{baseUrl}}"
-					],
-					"path": [
-						"cars",
-						"16"
-					]
+				{
+					"name": "Add Options",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"carId\": 16,\r\n    \"options\": [\"option a\", \"option b\", \"option c\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/cars/options",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cars",
+								"options"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Options By Car ID",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"options\": [\"a\", \"b\", \"c\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/cars/options/15",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cars",
+								"options",
+								"15"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Options By Car ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/cars/options/15",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cars",
+								"options",
+								"15"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
+		},
+		{
+			"name": "Car Specs",
+			"item": [
+				{
+					"name": "Get Specs By Car ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/cars/specs/6",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cars",
+								"specs",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Specs",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"carId\": 6,\r\n    \"specs\": [\"a\", \"b\", \"c\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/cars/specs",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cars",
+								"specs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Specs By Car ID",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"specs\": [\"x\", \"y\", \"z\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/cars/specs/133",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cars",
+								"specs",
+								"133"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Specs By Car ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/cars/specs/144",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cars",
+								"specs",
+								"144"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"event": [
