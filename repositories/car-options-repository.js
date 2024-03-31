@@ -3,7 +3,6 @@ const {CarOptions} = db.sequelize.models;
 
 async function findById(id) {
     return CarOptions.findAll({
-        attributes: ["option"],
         where: {
             carId: id,
         },
