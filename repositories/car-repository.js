@@ -77,7 +77,9 @@ async function add(payload) {
 }
 
 async function updateById(id, payload) {
-    payload.image = await processImagePhoto(payload.image);
+    if (payload.image) {
+        payload.image = await processImagePhoto(payload.image);
+    }
     await Car.update(payload, {
         where: {
             id: id,

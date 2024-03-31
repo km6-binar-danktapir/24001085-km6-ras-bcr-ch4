@@ -42,9 +42,12 @@ async function addCar(req, res, next) {
 async function updateCarById(req, res, next) {
     try {
         const carId = parseInt(req.params.id);
-        const body = req.body;
-        const {image} = req.files;
-        const payload = {...body, image};
+        let payload = req.body;
+
+        if (req.files) {
+            const {image} = req.files;
+            payload = {...payload, image};
+        }
         const data = await carService.updateById(carId, payload);
 
         return res.status(200).json({
