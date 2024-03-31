@@ -1,13 +1,18 @@
 const db = require("../models/index.js");
-const {CarSpecs} = db.sequelize.models;
+const {CarSpecs, Car} = db.sequelize.models;
 
 async function findById(id) {
-    return CarSpecs.findAll({
-        attributes: ["spec"],
-        where: {
-            carId: id,
-        },
-    });
+    const car = await Car.findByPk(id);
+
+    if (car) {
+        return CarSpecs.findAll({
+            attributes: ["spec"],
+            where: {
+                carId: id,
+            },
+        });
+    }
+    return [];
 }
 
 async function addOne(payload) {

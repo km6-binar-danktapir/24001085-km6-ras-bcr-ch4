@@ -35,9 +35,6 @@ async function _add(payload) {
 }
 
 async function validateInputFields(payload) {
-    /**
-     *  cek kalo ada value yg missing
-     */
     const {carId, options} = payload;
 
     if (!carId) {
