@@ -67,14 +67,7 @@ async function updateById(id, payload) {
 }
 
 async function deleteById(id) {
-    const toBeDeletedData = await carOptionsRepo.findById(id);
-
-    if (toBeDeletedData.length < 1) {
-        throw new HttpError({
-            statusCode: 404,
-            message: `Option(s) with car ID ${id} does not exist!`,
-        });
-    }
+    const toBeDeletedData = await findByCarId(id);
     await carOptionsRepo.deleteById(id);
     return toBeDeletedData;
 }

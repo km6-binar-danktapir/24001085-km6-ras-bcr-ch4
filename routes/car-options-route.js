@@ -4,7 +4,8 @@ const carOptionsController = require("../controllers/car-options-controller.js")
 
 router.route("/:id")
     .get(carOptionsController.findOptionsByCarId)
-    .patch(carOptionsController.updateOptionsByCarId);
+    .patch(carOptionsController.updateOptionsByCarId)
+    .delete(carOptionsController.deleteOptionsByCarId);
 
 router.route("/").post(carOptionsController.addOptions);
 
