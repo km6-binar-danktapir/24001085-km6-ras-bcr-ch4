@@ -1,5 +1,6 @@
 const db = require("../models/index.js");
-const {CarOptions, Car} = db.sequelize.models;
+const {CarOptions} = db.sequelize.models;
+const carRepo = require("./car-repository.js");
 const redis = require("../helpers/redis.js");
 
 async function findByCarId(carId) {
@@ -22,7 +23,7 @@ async function findByCarId(carId) {
 }
 
 async function getBelongingCarById(carId) {
-    return Car.findByPk(carId);
+    return carRepo.findById(carId);
 }
 
 async function addOne(payload) {

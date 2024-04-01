@@ -32,7 +32,7 @@ async function updateSpecsByCarId(req, res, next) {
     try {
         const carId = req.params.id;
         const payload = req.body.specs;
-        const data = await carSpecsService.updateById(carId, payload);
+        const data = await carSpecsService.updateByCarId(carId, payload);
 
         return res.status(200).json({
             data,
@@ -47,7 +47,7 @@ async function deleteSpecsByCarId(req, res, next) {
     try {
         const carId = req.params.id;
         const payload = req.body.options;
-        const data = await carSpecsService.deleteById(carId, payload);
+        const data = await carSpecsService.deleteByCarId(carId, payload);
 
         return res.status(200).json({
             data,

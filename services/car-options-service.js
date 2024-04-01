@@ -10,7 +10,7 @@ async function findByCarId(carId) {
             message: `Car with ID ${carId} does not exist!`,
         });
     }
-    return await carOptionsRepo.findByCarId(carId);
+    return carOptionsRepo.findByCarId(carId);
 }
 
 async function add(payload) {

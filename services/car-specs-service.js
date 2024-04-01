@@ -2,15 +2,15 @@ const carSpecsRepo = require("../repositories/car-specs-repository.js");
 const HttpError = require("../middlewares/http-error.js");
 
 async function findByCarId(carId) {
-    const specs = await carSpecsRepo.findById(carId);
+    const existingCar = await carSpecsRepo.getBelongingCarById(carId);
 
-    if (specs.length < 1) {
+    if (!existingCar) {
         throw new HttpError({
             statusCode: 404,
-            message: `Spec(s) with car ID ${carId} does not exist!`,
+            message: `Car with ID ${carId} does not exist!`,
         });
     }
-    return specs;
+    return carSpecsRepo.findByCarId(carId);
 }
 
 async function add(payload) {
@@ -53,19 +53,19 @@ async function validateInputFields(payload) {
     }
 }
 
-async function updateById(id, payload) {
+async function updateByCarId(carId, payload) {
     // delete dulu trus baru add yg baru
-    await deleteById(id);
+    await deleteByCarId(carId);
     return _add({
-        carId: id,
+        carId,
         specs: payload,
     });
 }
 
-async function deleteById(id) {
-    const toBeDeletedData = await findByCarId(id);
-    await carSpecsRepo.deleteById(id);
+async function deleteByCarId(carId) {
+    const toBeDeletedData = await findByCarId(carId);
+    await carSpecsRepo.deleteByCarId(carId);
     return toBeDeletedData;
 }
 
-module.exports = {add, updateById, deleteById, findByCarId};
+module.exports = {add, updateByCarId, deleteByCarId, findByCarId};
