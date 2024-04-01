@@ -47,7 +47,7 @@ async function deleteOptionsByCarId(req, res, next) {
     try {
         const carId = req.params.id;
         const payload = req.body.options;
-        const data = await carOptionsService.deleteById(carId, payload);
+        const data = await carOptionsService.deleteByCarId(carId, payload);
 
         return res.status(200).json({
             data,

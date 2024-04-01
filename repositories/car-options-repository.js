@@ -1,37 +1,61 @@
 const db = require("../models/index.js");
 const {CarOptions, Car} = db.sequelize.models;
+const redis = require("../helpers/redis.js");
 
-async function findById(id) {
-    const car = await Car.findByPk(id);
+async function findByCarId(carId) {
+    let data;
+    const key = `CarOptions:${carId}`;
+    data = await redis.getData(key);
 
-    if (car) {
-        return CarOptions.findAll({
-            attributes: ["option"],
-            where: {
-                carId: id
-            }
-        });
+    if (data) {
+        return data;
     }
-    return [];
+    data = await CarOptions.findAll({
+        attributes: ["option"],
+        where: {
+            carId: carId,
+        },
+    });
+    await redis.setData(key, data);
+
+    return data;
+}
+
+async function getBelongingCarById(carId) {
+    return Car.findByPk(carId);
 }
 
 async function addOne(payload) {
-    return [await CarOptions.create({
-        carId: payload.carId,
+    const carId = payload.carId;
+    const data = await CarOptions.create({
+        carId,
         option: payload.options,
-    })];
+    });
+    const key = `CarOptions:${carId}`;
+    await redis.setData(key, data);
+
+    return data;
 }
 
 async function addMultiple(payload) {
-    return CarOptions.bulkCreate(payload);
+    const carId = payload[0].carId;
+    const data = await CarOptions.bulkCreate(payload);
+    const key = `CarOptions:${carId}`;
+    await redis.setData(key, data);
+
+    return data;
 }
 
-async function deleteById(id) {
-    return CarOptions.destroy({
+async function deleteByCarId(carId) {
+    const deletedCount = await CarOptions.destroy({
         where: {
-            carId: id,
+            carId: carId,
         },
     });
+    const key = `CarOptions:${carId}`;
+    await redis.deleteData(key);
+
+    return deletedCount;
 }
 
-module.exports = {deleteById, findById, addOne, addMultiple};
+module.exports = {deleteByCarId, findByCarId, addOne, addMultiple, getBelongingCarById};
