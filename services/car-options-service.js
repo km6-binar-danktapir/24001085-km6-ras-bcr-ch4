@@ -54,7 +54,7 @@ async function validateInputFields(payload) {
     }
 }
 
-async function updateById(id, payload) {
+async function updateByCarId(id, payload) {
     // delete dulu trus baru add yg baru
     await deleteByCarId(id);
     return _add({
@@ -69,4 +69,4 @@ async function deleteByCarId(id) {
     return toBeDeletedData;
 }
 
-module.exports = {add, updateById, deleteByCarId, findByCarId};
+module.exports = {add, updateByCarId, deleteByCarId, findByCarId};

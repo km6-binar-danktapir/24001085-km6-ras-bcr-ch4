@@ -49,10 +49,10 @@ async function updateById(id, payload) {
     const carData = await carRepo.updateById(id, carPayload);
 
     if (cleanedPayload.options) {
-        await carOptionsService.updateById(carData.id, cleanedPayload.options);
+        await carOptionsService.updateByCarId(carData.id, cleanedPayload.options);
     }
     if (cleanedPayload.specs) {
-        await carSpecsService.updateById(carData.id, cleanedPayload.specs);
+        await carSpecsService.updateByCarId(carData.id, cleanedPayload.specs);
     }
     return findById(id);
 }
